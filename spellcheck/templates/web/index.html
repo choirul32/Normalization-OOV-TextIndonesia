@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Spell Checker</title>
+        <link rel="stylesheet" type = "text/css" href="{% static 'word2vec_web/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'word2vec_web/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <div class="container-fluid justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">
+                        Spell Checker
+                    </h3>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-10">
+                    <form method="post" role="form" action='/spellcheck/web/'>
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-group">
+
+                            <label for="your-text">
+                                Your text
+                            </label>
+                            <input type="text" class="form-control" id="your-text" name="your-text" value="{{ current_name }}">
+                        </div>
+                        
+                        <button type="submit" value="input" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <!-- output text disini -->
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

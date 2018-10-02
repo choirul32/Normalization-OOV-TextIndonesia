@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Naive Bayes Prediction</title>
+        <link rel="stylesheet" type = "text/css" href="{% static 'word2vec_web/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'word2vec_web/css/bootstrap.min.css' %}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+        	$("button").change(function () {
+        		console.log( $(this).val() );
+        		$.ajax({
+        			url: '/word2vec/web/',
+        			data: {
+        				'your-text': your-text
+        			},
+        			dataType: 'json',
+        			success: function (data) {
+        			
+        					alert("A user with this username already exists.");
+        				
+        			}
+        		});
+        	});
+        </script>
+
+    </head>
+    <body>
+        <div class="container-fluid justify-content-center align-items-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center">
+                        Naive Bayes Prediction
+                    </h3>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-10">
+                    <form method="post" role="form" action='/word2vec/web/'>
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-group">
+
+                            <label for="your-text">
+                                Your text
+                            </label>
+                            <input type="text" class="form-control" id="your-text" name="your-text" value="{{ current_name }}">
+                        </div>
+                        
+                        <button type="submit" value="input" class="btn btn-primary">
+                            Submit
+                        </button>
+
+                        
+                    </form>
+
+                    <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div>
+
+                    <button>MUNCUL</button>
+                </div>
+
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>
+                        <!-- output text disini -->
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
