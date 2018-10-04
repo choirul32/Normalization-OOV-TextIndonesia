@@ -5,7 +5,7 @@ from .python.NaiveBayes.NaiveBayes import testClassification
 from .forms import TextForm
 # Create your views here.
 
-def output(request):
+def output_2(request):
 	if request.method == 'POST':
 		form = TextForm(request.POST)
 		if form.is_valid():
@@ -14,25 +14,18 @@ def output(request):
 	else:
 		form = TextForm()
 	hasil = testClassification(request.POST['your-text'])
-	# return render(request, 'templates/web/index.html', {'form': form})
 	return HttpResponse("prediksi %r" %hasil)
-	# return render_to_response('web/index.html',
- #                          {'form': form},
- #                          context_instance=RequestContext(request))
+
+def output(request):
+	#text = request.POST.get('text', None);
+	if request.method == 'POST' and request.is_ajax():
+		text = request.POST.get("text");
+		hasil = testClassification(text)
+	return HttpResponse("prediksi %r" %hasil)
+	
 def index(request):
 	template = loader.get_template('NaiveBayes/index.html')
 	return HttpResponse(template.render())
 	
 def detail(request, question_id):
 	return HttpResponse("this is detail view in question: "+ question_id)
-
-# def csrf_failure(request, reason=""):
-#     ctx = {'message': 'some custom messages'}
-#     return render_to_response('web/index.html', ctx)
-
-def input_text(request):
-    if 'your-text' in request.POST:
-        message = request.POST['q']
-    else:
-        message = 'error'
-    return render_to_response('output.html', {'message': message}, context_instance=RequestContext(request))

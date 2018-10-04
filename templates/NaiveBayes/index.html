@@ -2,27 +2,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Naive Bayes Prediction</title>
+        <title>Normalization Out Of Vocabulary Bahasa Indonesia</title>
         <link rel="stylesheet" type = "text/css" href="{% static 'word2vec_web/css/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'word2vec_web/css/bootstrap.min.css' %}">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-        	$("button").change(function () {
-        		console.log( $(this).val() );
-        		$.ajax({
-        			url: '/word2vec/web/',
-        			data: {
-        				'your-text': your-text
-        			},
-        			dataType: 'json',
-        			success: function (data) {
-        			
-        					alert("A user with this username already exists.");
-        				
-        			}
-        		});
-        	});
+            $(document).ready(function(){
+                $("button").click(function(){
+                    var text = $('#your-text').val();
+                    console.log(text);
+                    $("#h21").html("memproses.....");
+                    $.ajax({
+                        type: "POST",
+                        url: "/word2vec/web/",
+                        data: {text: $('#your-text').val()},
+                        success: function(data) {
+                            $("#h21").html(data);
+                    }});
+                });
+            });
+            
         </script>
 
     </head>
@@ -31,33 +31,27 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-center">
-                        Naive Bayes Prediction
+                        Normalization Out Of Vocabulary Bahasa Indonesia
                     </h3>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md-10">
-                    <form method="post" role="form" action='/word2vec/web/'>
+                    <form id='normalisation' method="post">
                         {% csrf_token %}
                         {{ form }}
                         <div class="form-group">
 
-                            <label for="your-text">
-                                Your text
-                            </label>
                             <input type="text" class="form-control" id="your-text" name="your-text" value="{{ current_name }}">
                         </div>
                         
-                        <button type="submit" value="input" class="btn btn-primary">
-                            Submit
-                        </button>
-
-                        
                     </form>
+                    <button type="submit" value="input" class="btn btn-primary">Normalisasi</button>
 
+                    <div class="col-md-12"><h2 id="h21"></h2></div>
+                        
                     <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div>
 
-                    <button>MUNCUL</button>
                 </div>
 
                 <div class="col-md-2">
