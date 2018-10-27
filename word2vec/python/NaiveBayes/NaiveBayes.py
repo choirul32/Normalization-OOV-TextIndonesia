@@ -25,13 +25,32 @@ def splitDataset(dataset, splitRatio):
 		trainSet.append(copy.pop(index))
 	return [trainSet, copy]
 
-filename = 'word2vec/python/naivebayes/corpus.csv'
-dataset = loadCsv(filename)
+#filename = 'word2vec/python/naivebayes/corpus.csv'
+#dataset = loadCsv(filename)
+
+filenameKTB = 'word2vec/python/naivebayes/Dataset_KTB.csv'
+filenameKB = 'word2vec/python/naivebayes/Dataset_KB.csv'
+dataset = loadCsv(filenameKTB) + loadCsv(filenameKB)
+
 splitRatio = 0.70
 training_set, testing_set = splitDataset(dataset, splitRatio)
 
-def word_features(word):
+def word_features_2(word):
     return dict(((ng, True) for ng in ngrams(word.lower(),4)))
+
+def word_features(word):
+	features = {}
+	for i, ng in enumerate(ngrams(word.lower(),4)):
+		features[i] = (ng, True) 
+	if word[:3] == "nge":
+		features["prefix_2"] = ("nge", True) 
+	elif word[:2] == "ke":	
+		features["prefix_1"] = ("ke", True)
+	if word[-1] == "k":
+		features["sufix_1"] = ("k", True)
+	elif word[-2:] == "in":
+		features["sufix_2"] = ("in", True)
+	return features
 
 training_set = [(word_features(n), jenis_kata) for (n, jenis_kata) in training_set]
 testing_set = [(word_features(n), jenis_kata) for (n, jenis_kata) in testing_set]

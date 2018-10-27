@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Normalization Prediction</title>
+        <title>Upload New Data</title>
         <link rel="stylesheet" type = "text/css" href="{% static 'word2vec_web/css/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'word2vec_web/css/bootstrap.min.css' %}">
     </head>
@@ -11,21 +11,27 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-center">
-                        Normalization Prediction
+                        Upload New Data
                     </h3>
                 </div>
             </div>
             <div class="row ">
                 <div class="col-md-10">
-                    <form method="post" role="form" action='/normalization/web/'>
+                    <form method="post" role="form" action='web/'>
                         {% csrf_token %}
                         {{ form }}
                         <div class="form-group">
 
                             <label for="your-text">
-                                Your text
+                                Teks Baru
                             </label>
-                            <input type="text" class="form-control" id="your-text" name="your-text" value="{{ current_name }}">
+                            <input type="text" class="form-control" id="teks_baru" name="teks_baru" value="{{ current_name }}">
+
+                            <label for="data_kalimat">
+                                Data Kalimat
+                            </label>
+
+                            <input type="text" class="form-control" id="data_kalimat" name="data_kalimat" value="{{ current_name }}">
                         </div>
                         
                         <button type="submit" value="input" class="btn btn-primary">

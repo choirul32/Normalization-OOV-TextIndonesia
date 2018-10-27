@@ -34,6 +34,7 @@ list_pairs = []
 for n in range (len(pairs)-1):
     if pairs[n][0] in model_source.wv.vocab and pairs[n][1] in model_target.wv.vocab:
         list_pairs.append((pairs[n][0], pairs[n][1]))
+        print(pairs[n][0])
         
 print(len(pairs)-len(list_pairs))
 
