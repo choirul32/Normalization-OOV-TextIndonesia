@@ -43,6 +43,8 @@ pairs = tuple(pairs)
 transmat = TranslationMatrix(model_source, model_target, pairs)
 transmat.train(pairs)
 
+
+
 def testNormalization(word):
 	try:
 		translate = transmat.translate([word], topn=3, source_lang_vec=model_source, target_lang_vec=model_target)
